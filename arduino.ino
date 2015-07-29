@@ -1,29 +1,66 @@
-char a;
+char pyin;
+int cw;
+int i;
 char b;
-int pin;
+int cw2;
+int senswal;
+
 void setup() {
   Serial.begin(9600);
 }
 
 void loop() {
-  
+ pyduino();
+}
+
+
+void pyduino(){
   if(Serial.available()){
-    a = Serial.read();
+    pyin = Serial.read();
+    //analyzing the intput to determine function
+    cw = (int)pyin;
+    //Serial.println(cw);
+    if(cw & 64){
+      darw(cw);
+  }
+    else if(cw & 32){
+      pm(cw);
+   }
+}
+}
+
+void darw(int cw){
+  if( cw & 32){
     
-    Serial.println((int)a);
-    delay(1);
-    if(Serial.available()){
-        b = Serial.read();
-        pin = a & 15;
-        Serial.println(pin);
-        if(b & 1){
-            digitalWrite(pin,HIGH);
-            delay(2000);
-         }
-        else{
-            digitalWrite(pin,LOW);
-            delay(2000);
+      if(cw & 16){
+        delay(2);
+        if(Serial.available()){
+           b = Serial.read();
+        cw2 = b;
+        if(cw2 & 15)
+        digitalWrite(cw & 15,HIGH);
+        else 
+        digitalWrite(cw & 15,LOW);
         }
-    }
+      }
+      else{
+        senswal = digitalRead(cw & 15);
+        Serial.println(senswal);
+      }
   }
 }
+
+int pm(int cw){
+  if(cw & 16){
+    pinMode(cw & 15, OUTPUT);
+    //Serial.println("pm output");
+    return 1;
+  }
+  else {
+    pinMode(cw & 15, INPUT);
+    //Serial.println("pm input");
+    return 1;
+  }
+}
+
+
