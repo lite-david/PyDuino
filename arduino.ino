@@ -10,15 +10,20 @@ void setup() {
 }
 
 void loop() {
+ //enter user code here. Whenever you think a command is needed from the python, use pyduino() function
  pyduino();
 }
 
 
 void pyduino(){
+  
   if(Serial.available()){
+    
     pyin = Serial.read();
+    
     //analyzing the intput to determine function
     cw = (int)pyin;
+    
     //Serial.println(cw);
     if(cw & 64){
       darw(cw);
