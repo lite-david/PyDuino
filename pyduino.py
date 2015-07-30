@@ -7,10 +7,11 @@ by Edwin Mascarenhas
 edwin.mascarenhas95@gmail.com
 '''
 import serial
+import time
 global cw
 cw = 1
 global ser
-ser = serial.Serial('/dev/ttyUSB0',9600)
+ser = serial.Serial('/dev/ttyUSB2',9600)
 
 def dw(pin,value):
 	if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
@@ -63,9 +64,16 @@ def pm(pin,mode):
 		pm_cw_1 = cw  << 5 | pin | cw << 4
 		flag = ser.write(chr(pm_cw_1))
 		return True if flag else False
-		
 
-pm(12,'INPUT')
-pm(13,'OUTPUT')
-dw(13,'HIGH')
-dr(12)
+
+def delay(millisec):
+	time.sleep(millisec/1000)
+
+#LED blink example 
+
+	pm(13,'OUTPUT')
+for i in range(0,10):
+	dw(13,'HIGH')
+	delay(1000)
+	dw(13,'LOW')
+	delay(1000)
