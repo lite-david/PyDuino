@@ -53,6 +53,16 @@ Useage:
 delay(1000)
 This gives a 1 second delay.
 
+## Usage
+
+<code>import pyduino </code>                                                                                                 
+<code>ard = pyduino.arduino('/dev/ttyUSB0',9600)  </code>                                                                           
+<code>ard.pm(13,'OUTPUT')   </code>                                                                                                 
+<code>ard.dw(13,'HIGH') </code>
+
+This will set pin 13 of the arduino as OUTPUT and will turn an LED connected to the PIN 13 on.
+
+
 ## Future work
 
 -- Adding analog functions
