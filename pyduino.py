@@ -1,79 +1,89 @@
-'''
-PyDuino python library for using arduino based functions from python
-Via serial connection between hardware and PC 
-Check arduino.ino for functions to be added on the arduino
+#!/usr/bin/python
 
-by Edwin Mascarenhas 
-edwin.mascarenhas95@gmail.com
-'''
-import serial
-import time
-global cw
-cw = 1
-global ser
-ser = serial.Serial('/dev/ttyUSB2',9600)
+class arduino:
 
-def dw(pin,value):
-	if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
-		print "Error: Incorrect pin value"
-		return False 
-	elif(value is not "HIGH"):
-		if(value is not "LOW"):
-			print "Error: Value can be either HIGH or LOW"
-			return False
-	dw_cw_1 = cw << 6 | cw << 5 | cw << 4
-	dw_cw_2 = dw_cw_1 | pin
-	if ser.isOpen():
-		ser.write(chr(dw_cw_2))
-		if value == 'HIGH':
-			ser.write(chr(dw_cw_1 | 15))
-			return True
-		elif value == 'LOW':
-			ser.write(chr(dw_cw_1))
-			return True
+	def __init__(self,port,baud):
+		import serial
+		import time
+		global cw
+		cw = 1
+		print "Opening %s" %port
+		self.ser = serial.Serial(port,baud)
+		if self.ser.isOpen():
+			print "Opened %s at %d baud" % (port,baud)	
+			return 
 		else:
-			print "Error: Can't access device file"
+			print "Error: Could not open specified port"
+			return 
+
+	def pm(self,pin,mode):
+		"""
+		Sets specified arduino pin as input or output.
+		Usage: pm(pin,mode)
+		pin takes integer value from 0 to 13, mode is 'INPUT' or 'OUTPUT'
+
+		"""
+		if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
+			print "Error: Incorrect pin value"
+			return False
+		elif(mode != 'OUTPUT' and mode != 'INPUT'):
+			print "Error: Invalid mode"
+			return False
+		if(mode == 'INPUT'):	
+			pm_cw_1 = cw  << 5 | pin 
+			flag = self.ser.write(chr(pm_cw_1))
+			return True if flag else False
+		elif(mode == 'OUTPUT'):
+			pm_cw_1 = cw  << 5 | pin | cw << 4
+			flag = self.ser.write(chr(pm_cw_1))
+			return True if flag else False
+
+	def dw(self,pin,value):
+		"""
+		Makes a specifed digital pin 'HIGH' or 'LOW'
+		Useage: dw(pin,value)
+		pin takes interger value from 0 to 13, value is 'HIGH' or 'LOW'
+
+		"""
+		if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
+			print "Error: Incorrect pin value"
+			return False 
+		elif(value is not "HIGH"):
+			if(value is not "LOW"):
+				print "Error: Value can be either HIGH or LOW"
+				return False
+		dw_cw_1 = cw << 6 | cw << 5 | cw << 4
+		dw_cw_2 = dw_cw_1 | pin
+		if self.ser.isOpen():
+			self.ser.write(chr(dw_cw_2))
+			if value == 'HIGH':
+				self.ser.write(chr(dw_cw_1 | 15))
+				return True
+			elif value == 'LOW':
+				self.ser.write(chr(dw_cw_1))
+				return True
+		else:
+			print "Error: Could not open specified port"
 			return False
 
-def dr(pin):
-	if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
-		print "Error: Incorrect pin value"
-		return False
-	dr_cw_1 = cw << 6 | cw << 5 | pin
-	if ser.isOpen():
-		ser.write(chr(dr_cw_1))
-		print ser.read()
-		return True
-	else:
-		print "Error: Can't access device file"
-		return False
-	
+	def dr(self,pin):
+		"""
+		Reads specifed digital pin and prints its value on console
+		Useage: dr(pin)
+		pin takes integer value from 0 to 13.
 
-def pm(pin,mode):
-	if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
-		print "Error: Incorrect pin value"
-		return False
-	elif(mode != 'OUTPUT' and mode != 'INPUT'):
-		print "Error: Invalid mode"
-		return False
-	if(mode == 'INPUT'):	
-		pm_cw_1 = cw  << 5 | pin 
-		flag = ser.write(chr(pm_cw_1))
-		return True if flag else False
-	elif(mode == 'OUTPUT'):
-		pm_cw_1 = cw  << 5 | pin | cw << 4
-		flag = ser.write(chr(pm_cw_1))
-		return True if flag else False
+		"""
+		if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
+			print "Error: Incorrect pin value"
+			return False
+		dr_cw_1 = cw << 6 | cw << 5 | pin
+		if self.ser.isOpen():
+			self.ser.write(chr(dr_cw_1))
+			return self.ser.read()
+		else:
+			print "Error: Could not open specified port"
+			return False
 
+	def delay(millisec):
+		time.sleep(millisec/1000)
 
-def delay(millisec):
-	time.sleep(millisec/1000)
-
-#LED blink example 
-
-	pm(13,'OUTPUT')
-for i in range(0,10):
-	dw(13,'HIGH')
-	delay(1000)
-	dw(13,'LOW')
-	delay(1000)
