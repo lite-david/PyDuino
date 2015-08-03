@@ -50,7 +50,7 @@ void darw(int cw){
       }
       else{
         senswal = digitalRead(cw & 15);
-        Serial.println(senswal);
+        Serial.print(senswal);
       }
   }
 }
