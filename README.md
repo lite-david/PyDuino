@@ -6,6 +6,8 @@ The PyDuino project aims to make python interactive with hardware particularly a
 
 The python interactive terminal can be used to shoot commands to the arduino for quick testing/prototyping. Moreover if a python script is being written which requires hardware interaction, the need can easily be fulfilled. The python library (see pyduino.py) has functions, names kept very short, like dw() for digitalWrite, pm() for pinMode(), parameters given in the same format too, like dw(pin,value) is similar to digitalWrite(pin,value). This makes it a breeze to type, test and debug. There are a few other libraries out there which try to do the similar thing, but this one uses minimum data transfer via the serial connection. 
 
+Currently tested with Arduino UNO and Freeduino v1.16 based on Arduino UNO. Python version 2.7.6, default available on Ubuntu 14.04 systems. Make sure python interpreter or code is running as root/superuser.
+
 ##Under the hood
 
 A byte of data is being sent on the serial communication, using the PySerial python library. However with every serial.write(), the an ASCII character is being sent. So on writing serial.write("99"), arduino reads it as two seperate characters 9 and 9. However each ASCII character has an equivalent decimal number or rather 0 - 256 decimal numbers, ie an 8 bit number has an equivalent ASCII character. I have exploited this property, to encode function information bitwise in a number and send it as an ASCII character over the serial connection, which is just 1 byte long and then decode it at the arduino end.
@@ -37,7 +39,7 @@ The function has been tested and it works.
 
 ####dr(pin)
 
-Equivalent to digitalRead(pin) on arduino. Reads the value on the specified pin and prints it on the python terminal. Function is yet to be entirely tested. Has worked for certain cases.
+Equivalent to digitalRead(pin) on arduino. Reads the value on the specified pin and prints it on the python terminal. Returns the value of the pin specified. Here pin takes integer values from 0 to 13.
 
 ####pm(pin,mode)
 
