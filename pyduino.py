@@ -83,6 +83,23 @@ class arduino:
 		else:
 			print "Error: Could not open specified port"
 			return False
+                    
+	def aw(self,pin,value):
+		if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
+			print "Error: Incorrect pin value"
+			return False
+        	elif(value > 255 or value < 0 ):
+			print "Error: Value can be between 255 and 0 only"
+			return False
+		aw_cw_1= cw << 6 | pin | cw << 4
+		if self.ser.isOpen():
+			self.ser.write(chr(aw_cw_1))
+			self.ser.write(chr(value))
+		else:
+			print "Error: Could not open specified port"
+			return False
+		        
+	    
 
 	def delay(millisec):
 		time.sleep(millisec/1000)
