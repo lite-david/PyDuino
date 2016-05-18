@@ -53,6 +53,18 @@ void darw(int cw){
         Serial.print(senswal);
       }
   }
+  else
+  {
+   int pin =(int) cw & 15;
+   delay(2);
+   if(Serial.available()){
+     b=Serial.read();
+     int val= (int) (b & 255);
+     analogWrite(pin,val);
+     Serial.print(pin);
+     Serial.print(val);  
+    
+  }
 }
 
 int pm(int cw){
