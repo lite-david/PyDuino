@@ -7,9 +7,9 @@ import pyduino
 import time
 ard = pyduino.arduino('/dev/ttyACM1',9600)
 while(1):
-    motorvalue=ard.ar(0)
+    potvalue=ard.ar(0)
     print('Value from Potentiometer: %d ' % (motorvalue))
-    ledvalue=motorvalue//4
+    ledvalue=potvalue//4
     ard.aw(3, ledvalue)
     time.sleep(0.1)
     
