@@ -32,7 +32,7 @@ if 6th bit - 0 : Implements pinMode() function
 	
 Equivalent to digitalWrite(pin,value) on arduino. Makes the specified pin, either HIGH or LOW. The function has error detection for wrong pin number and takes only integer values. Value can be either 'HIGH' or 'LOW'. Sends two bytes of data over the serial line, 1st byte according to the information above. Second byte to indicate whether 'HIGH' or 'LOW'
 The format for second byte is, bits 7,6,5,4 remain same. If 3rd - 0th bit are 0's then 'LOW'. If 3rd - 0th bit all 1's then 'HIGH'.
-Useage: 
+Usage: 
 dw(13,'HIGH')
 sets pin 13 high, ie 3.3V or 5V 
 The function has been tested and it works.
@@ -54,6 +54,17 @@ Equivalent to delay(millisecs) function on arduino. Pauses the python interprete
 Useage:
 delay(1000)
 This gives a 1 second delay.
+
+####ar(pin)
+
+Equivalent to analogRead(pin) on arduino. Reads the value on the given pin and returns an integer between 0 and 1023. The pin takes values from 0 to 5 equivalent to A0 to A5 on the Arduino UNO Board.
+
+####aw(pin,value)
+	
+Equivalent to analogWrite(pin,value) on arduino. Assigns specified voltage to the pin according to the integer passed. The function has error detection for wrong pin number and takes only integer values. Value can be between 0 and 255. Sends two bytes of data over the serial line, 1st byte according to the information above. Second byte to specify the value between 0 and 255 in bits.
+Usage: 
+aw(3,150)
+sets pin 3 with value 150. 
 
 ## Usage
 

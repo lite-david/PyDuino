@@ -85,6 +85,12 @@ class arduino:
 			return False
                     
 	def aw(self,pin,value):
+                """
+		Changes the voltage of an analog Pin according to the value
+		Useage: aw(pin,value)
+		pin takes interger value from 0 to 13, value is between 0 and 255 only.
+
+		"""
 		if(pin > 13 or pin < 0 or type(pin).__name__ != "int"):
 			print "Error: Incorrect pin value"
 			return False
@@ -99,6 +105,12 @@ class arduino:
 			print "Error: Could not open specified port"
 			return False
 	def ar(self,pin):
+                """
+		Reads specifed analog pin and prints its value on console between 0 and 1023.
+		Usage: ar(pin)
+		pin takes integer value from 0 to 13.
+
+		"""
 		if(pin > 5 or pin < 0 or type(pin).__name__ != "int"):
 			print "Error: Incorrect pin value"
 			return False
