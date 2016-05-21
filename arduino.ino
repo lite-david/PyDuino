@@ -49,21 +49,27 @@ void darw(int cw){
         }
       }
       else{
+        Serial.flush();
         senswal = digitalRead(cw & 15);
-        Serial.print(senswal);
-      }
+        Serial.println(senswal);
+        }
   }
   else
   {
+    if( cw & 16){
    int pin =(int) cw & 15;
    delay(2);
    if(Serial.available()){
      b=Serial.read();
      int val= (int) (b & 255);
-     analogWrite(pin,val);
-     Serial.print(pin);
-     Serial.print(val);  
-    
+    analogWrite(pin,val);   
+   }
+  }
+  else
+  {
+    senswal = analogRead(cw & 15);
+    Serial.println(senswal, DEC);
+  }
   }
 }
 

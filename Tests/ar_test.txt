@@ -1,0 +1,12 @@
+
+#Title: This is a Test designed to test workings of aw#
+#Pranaydeep Singh#
+#E-mail: theeviltwin@protonmail.com#
+#Code for ar last changed: 18th May 2016#
+
+The ar function works as the analogRead function does. It takes one argument which is the pin no between 0 and 5.
+It returns an output between 0 for ground and 1023 for 5V.
+A circuit was designed to test the workings of ar. An Arduino Uno was used to test the function
+Circuit Description: A 10k Potentiometer is attached with it's central connection to Pin A0 of Arduino and one to 5V and one to ground. An LED is also attached at pin 3.
+The circuit works in a simple way. More the resistance less is the Voltage at A0 and lesser is the brightness of the LED at pin 3.
+The python code for the above is provided as ar_test.py.
