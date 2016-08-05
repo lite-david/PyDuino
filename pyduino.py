@@ -4,7 +4,8 @@ class arduino:
 
 	def __init__(self,port,baud):
 		import serial
-		import time
+		import time as t
+		self.t = t
 		global cw
 		cw = 1
 		print "Opening %s" %port
@@ -125,6 +126,6 @@ class arduino:
 		        
 	    
 
-	def delay(millisec):
-		time.sleep(millisec/1000)
+	def delay(self,millisec):
+		self.t.sleep(millisec/1000)
 
