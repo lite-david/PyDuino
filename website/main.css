@@ -1,0 +1,139 @@
+@font-face {
+    font-family: python;
+    src: url(ufonts.com_flux.woff);
+}
+
+@font-face {
+    font-family: arduino;
+    src: url(DejaVuSansMono-Bold-webfont.woff);
+}
+
+
+span1{
+    color:rgb(81,81,81);
+    font-family: python;
+    font-size:45px;
+}
+span2{
+    color:#2a5052 ;
+    font-family: arduino;
+    font-size:45px;
+}
+
+.navbar-default .navbar-nav > li > a {
+color:  #e5e5e5;  /*Sets the text hover color on navbar*/
+   
+}
+
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color:white;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >   
+ a:hover, .navbar-default .navbar-nav > .active > a:focus {
+
+}
+
+  .dropdown-menu > li > a:hover,
+   .dropdown-menu > li > a:focus {
+
+       /*change color of links in drop down here*/
+}
+
+ .nav > li > a:hover,
+ .nav > li > a:focus {
+ /*Change rollover cell color here*/
+  }
+.navbar-default{
+    background-color: rgb(11,76,139);
+      font-family: arduino;
+
+}
+.text-center{
+    font-size:40px;
+}
+
+.navbar-nav > li > a {padding-top:9px !important; padding-bottom:9px !important;}
+.navbar {min-height:40px !important}
+
+#con{
+    box-shadow: 0px 4px 10px #B8CBC7;
+    border-radius: 10px;
+}
+.news_section > h4 , .news_section > p {
+    font-family: 'Open Sans',sans-serif;
+}
+h4{
+    text-decoration: underline;
+}
+
+.col-md-2, .col-md-9 {
+    border-radius:10px;
+    background-color: #ecf2f3;
+    color:#372020;
+    margin-top:-10px;
+}
+.col-md-9{
+    width:82%;
+    padding:20px;
+    margin-right:1%;
+    margin-bottom:4%;
+}
+.col-md-2{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#ard1{
+    width:90%;
+}
+.right.carousel-control, .lkeft.carousel-control {
+    display: none;
+}
+.carousel-inner{
+  width:100%;
+  max-height: 700px !important;
+}
+.img-responsive{
+    margin: 0px auto;
+}
+#imge{
+    padding-top:3.5%;
+    margin-left:0px;
+}
+#git{
+    padding-top:16px;
+    margin-left:0px;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 0px;
+}
+.footer {
+    clear: both;
+    z-index: 10;
+
+  position: relative;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: rgb(11,76,139);
+    border-radius: 4px;   
+    margin-bottom:8px;
+    margin-top:8px;
+}
+.txt {
+    color:white;
+    font-family: arduino;
+    color:  #e5e5e5; 
+    text-align: center;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
