@@ -75,6 +75,9 @@ sets pin 3 with value 150.
 
 This will set pin 13 of the arduino as OUTPUT and will turn an LED connected to the PIN 13 on.
 
+### Installation
+
+`python setup.py install` (root permissions may be required)
 
 ## Future work
 
