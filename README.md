@@ -1,6 +1,6 @@
 # PyDuino
 
-##Introducing the PyDuino
+## Introducing the PyDuino
 
 The PyDuino project aims to make python interactive with hardware particularly arduino. 
 
@@ -8,7 +8,7 @@ The python interactive terminal can be used to shoot commands to the arduino for
 
 Currently tested with Arduino UNO and Freeduino v1.16 based on Arduino UNO. Python version 2.7.6, default available on Ubuntu 14.04 systems. Make sure python interpreter or code is running as root/superuser.
 
-##Under the hood
+## Under the hood
 
 A byte of data is being sent on the serial communication, using the PySerial python library. However with every serial.write(), the an ASCII character is being sent. So on writing serial.write("99"), arduino reads it as two seperate characters 9 and 9. However each ASCII character has an equivalent decimal number or rather 0 - 256 decimal numbers, ie an 8 bit number has an equivalent ASCII character. I have exploited this property, to encode function information bitwise in a number and send it as an ASCII character over the serial connection, which is just 1 byte long and then decode it at the arduino end.
 
@@ -26,9 +26,9 @@ if 6th bit - 0 : Implements pinMode() function
 4th bit - 0 if input, 1 if output 										
 3rd bit - 0th bit - Pin number											
 
-##Function Description
+## Function Description
 
-####dw(pin,value)
+#### dw(pin,value)
 	
 Equivalent to digitalWrite(pin,value) on arduino. Makes the specified pin, either HIGH or LOW. The function has error detection for wrong pin number and takes only integer values. Value can be either 'HIGH' or 'LOW'. Sends two bytes of data over the serial line, 1st byte according to the information above. Second byte to indicate whether 'HIGH' or 'LOW'
 The format for second byte is, bits 7,6,5,4 remain same. If 3rd - 0th bit are 0's then 'LOW'. If 3rd - 0th bit all 1's then 'HIGH'.
@@ -37,29 +37,29 @@ dw(13,'HIGH')
 sets pin 13 high, ie 3.3V or 5V 
 The function has been tested and it works.
 
-####dr(pin)
+#### dr(pin)
 
 Equivalent to digitalRead(pin) on arduino. Reads the value on the specified pin and prints it on the python terminal. Returns the value of the pin specified. Here pin takes integer values from 0 to 13.
 
-####pm(pin,mode)
+#### pm(pin,mode)
 
 Equivalent to pinMode(pin,value) on arduino. Sets specified pin as input or output. The function has been tested and works correctly. Mode can be either 'INPUT' or 'OUTPUT'
 Useage:
 pm(13,'INPUT')
 Sets pin 13 as input
 
-####delay(millisecs)
+#### delay(millisecs)
 
 Equivalent to delay(millisecs) function on arduino. Pauses the python interpreter for the specified time. Utilizes python's time library. Note, here time is to be specified in milliseconds and not in seconds.
 Useage:
 delay(1000)
 This gives a 1 second delay.
 
-####ar(pin)
+#### ar(pin)
 
 Equivalent to analogRead(pin) on arduino. Reads the value on the given pin and returns an integer between 0 and 1023. The pin takes values from 0 to 5 equivalent to A0 to A5 on the Arduino UNO Board.
 
-####aw(pin,value)
+#### aw(pin,value)
 	
 Equivalent to analogWrite(pin,value) on arduino. Assigns specified voltage to the pin according to the integer passed. The function has error detection for wrong pin number and takes only integer values. Value can be between 0 and 255. Sends two bytes of data over the serial line, 1st byte according to the information above. Second byte to specify the value between 0 and 255 in bits.
 Usage: 
